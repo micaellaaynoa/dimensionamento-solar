@@ -1,11 +1,11 @@
 <script>
 	import { fade } from 'svelte/transition'
-	import Mapa from './_components/mapa.svelte'
-	import SeletorCidade from './_components/SeletorCidade.svelte'
-	import SeletorConcessionaria from './_components/SeletorConcessionaria.svelte'
-	import SeletorPreco from './_components/SeletorPreco.svelte'
-	import FormDadosCliente from './_components/FormDadosCliente.svelte'
-	import Resultado from './_components/Resultado.svelte'
+	import Mapa from './components/mapa.svelte'
+	import SeletorCidade from './components/SeletorCidade.svelte'
+	import SeletorConcessionaria from './components/SeletorConcessionaria.svelte'
+	import SeletorPreco from './components/SeletorPreco.svelte'
+	import FormDadosCliente from './components/FormDadosCliente.svelte'
+	import Resultado from './components/Resultado.svelte'
 
 	$: estado = {}
 	$: cidade = ''
