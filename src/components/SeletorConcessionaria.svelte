@@ -1,5 +1,5 @@
 <script>
-	import FancyInput from '../../../components/FancyInput.svelte'
+	import FancyInput from './FancyInput.svelte'
 	export let concessionaria
 
 	function setConcessionaria(event) {
