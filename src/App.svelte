@@ -1,30 +1,69 @@
 <script>
-	export let name;
+	import { fade } from 'svelte/transition'
+	import Mapa from './components/mapa.svelte'
+	import SeletorCidade from './components/SeletorCidade.svelte'
+	import SeletorConcessionaria from './components/SeletorConcessionaria.svelte'
+	import SeletorPreco from './components/SeletorPreco.svelte'
+	import FormDadosCliente from './components/FormDadosCliente.svelte'
+	import Resultado from './components/Resultado.svelte'
+
+	$: estado = {}
+	$: cidade = ''
+	$: concessionaria = ''
+	$: preco = ''
+	$: dadosCliente = {}
+
+	const scrollIntoView = node => node.scrollIntoView({ behavior: 'smooth' })
+	const centerInScreen = node => node.style.marginBottom = `${window.innerHeight / 2}px`
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
-
 <style>
-	main {
+	.container {
 		text-align: center;
-		padding: 1em;
-		max-width: 240px;
+		max-width: 800px;
 		margin: 0 auto;
 	}
 
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
+	.container > * {
+		margin-bottom: 70px;
 	}
 </style>
+
+<div class="container" use:centerInScreen>
+	<div use:scrollIntoView>
+		<h1>Olá! Bem-vindo(a) ao simulador do Canal Solar</h1>
+		<p>Nós vamos te ajudar a economizar na sua conta de energia. Nossa ferramenta gratuita vai analisar sua conta de energia e dimensionar o sistema de energia solar ideal para sua residência</p>
+		<h2 style="margin-top: 30px;">Em qual estado você mora?</h2>
+		<Mapa on:click="{event => estado = event.detail}" />
+	</div>
+
+	{#if estado.id}
+		<div in:fade use:scrollIntoView>
+			<SeletorCidade bind:estado_id={estado.id} bind:cidade />
+		</div>
+	{/if}
+
+	{#if cidade}
+		<div in:fade use:scrollIntoView>
+			<SeletorConcessionaria bind:concessionaria />
+		</div>
+	{/if}
+
+	{#if concessionaria}
+		<div in:fade use:scrollIntoView>
+			<SeletorPreco bind:preco />
+		</div>
+	{/if}
+
+	{#if preco}
+		<div in:fade="{{delay: 100}}" use:scrollIntoView>
+			<FormDadosCliente bind:dadosCliente />
+		</div>
+	{/if}
+
+	{#if dadosCliente.email}
+	<div in:fade use:scrollIntoView>
+		<Resultado />
+	</div>
+	{/if}
+</div>
