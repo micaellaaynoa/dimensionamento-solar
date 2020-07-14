@@ -1,10 +1,10 @@
 <script>
-	export let preco
+	import { preco } from '../stores/dimensionamento'
 	export let ultimaConta
 
 	function handleSubmit(event) {
 		ultimaConta = event.target.ultimaConta.value
-		preco = 1
+		$preco = 1
 	}
 </script>
 

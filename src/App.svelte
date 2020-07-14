@@ -1,17 +1,12 @@
 <script>
 	import { fade } from 'svelte/transition'
+	import { estado, cidade, concessionaria, preco, dadosCliente } from './stores/dimensionamento'
 	import Mapa from './components/mapa.svelte'
 	import SeletorCidade from './components/SeletorCidade.svelte'
 	import SeletorConcessionaria from './components/SeletorConcessionaria.svelte'
 	import SeletorPreco from './components/SeletorPreco.svelte'
 	import FormDadosCliente from './components/FormDadosCliente.svelte'
 	import Resultado from './components/Resultado.svelte'
-
-	$: estado = {}
-	$: cidade = ''
-	$: concessionaria = ''
-	$: preco = ''
-	$: dadosCliente = {}
 
 	const scrollIntoView = node => node.scrollIntoView({ behavior: 'smooth' })
 	const centerInScreen = node => node.style.marginBottom = `${window.innerHeight / 2}px`
@@ -34,34 +29,34 @@
 		<h1>Olá! Bem-vindo(a) ao simulador do Canal Solar</h1>
 		<p>Nós vamos te ajudar a economizar na sua conta de energia. Nossa ferramenta gratuita vai analisar sua conta de energia e dimensionar o sistema de energia solar ideal para sua residência</p>
 		<h2 style="margin-top: 30px;">Em qual estado você mora?</h2>
-		<Mapa on:click="{event => estado = event.detail}" />
+		<Mapa on:click="{event => estado.set(event.detail)}" />
 	</div>
 
-	{#if estado.id}
+	{#if $estado.id}
 		<div in:fade use:scrollIntoView>
-			<SeletorCidade bind:estado_id={estado.id} bind:cidade />
+			<SeletorCidade />
 		</div>
 	{/if}
 
-	{#if cidade}
+	{#if $cidade}
 		<div in:fade use:scrollIntoView>
-			<SeletorConcessionaria bind:concessionaria />
+			<SeletorConcessionaria />
 		</div>
 	{/if}
 
-	{#if concessionaria}
+	{#if $concessionaria}
 		<div in:fade use:scrollIntoView>
-			<SeletorPreco bind:preco />
+			<SeletorPreco />
 		</div>
 	{/if}
 
-	{#if preco}
+	{#if $preco}
 		<div in:fade="{{delay: 100}}" use:scrollIntoView>
-			<FormDadosCliente bind:dadosCliente />
+			<FormDadosCliente />
 		</div>
 	{/if}
 
-	{#if dadosCliente.email}
+	{#if $dadosCliente.email}
 	<div in:fade use:scrollIntoView>
 		<Resultado />
 	</div>

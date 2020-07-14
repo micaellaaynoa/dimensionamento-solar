@@ -1,14 +1,18 @@
 <script>
-	export let estado_id
-	export let cidade
+	import { onDestroy } from 'svelte'
+	import { estado, cidade } from '../stores/dimensionamento'
 
 	async function fetchMunicipios(id) {
-		cidade = ''
+		$cidade = ''
 		const res = await fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${id}/municipios`)
 		return await res.json()
 	}
 
-	$: cities = fetchMunicipios(estado_id)
+	let lista_cidade
+	const unsubscribe = estado.subscribe(v => {
+		lista_cidade = fetchMunicipios(v.id)
+	})
+	onDestroy(unsubscribe)
 </script>
 
 <style>
@@ -40,9 +44,9 @@
 </style>
 
 <h2>Muito bem. Agora precisamos saber o nome da sua cidade</h2>
-<select bind:value="{cidade}">
+<select bind:value="{$cidade}">
 	<option value="">Selecione</option>
-	{#await cities}
+	{#await lista_cidade}
 		<option value="">buscando...</option>
 	{:then municipios}
 		{#each municipios as municipio}
