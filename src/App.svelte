@@ -1,6 +1,7 @@
 <script>
 	import { fade } from 'svelte/transition'
-	import { estado, cidade, concessionaria, preco, dadosCliente } from './stores/dimensionamento'
+	import dadosCliente from './stores/cliente'
+	import { estado, cidade, concessionaria, preco } from './stores/dimensionamento'
 	import Mapa from './components/mapa.svelte'
 	import SeletorCidade from './components/SeletorCidade.svelte'
 	import SeletorConcessionaria from './components/SeletorConcessionaria.svelte'

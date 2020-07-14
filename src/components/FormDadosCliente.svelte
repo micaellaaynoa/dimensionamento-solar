@@ -1,9 +1,9 @@
 <script>
-	import { dadosCliente } from '../stores/dimensionamento'
+	import cliente from '../stores/cliente'
 	import FancyInput from './FancyInput.svelte'
 
 	function handleSubmit(event) {
-		$dadosCliente = {
+		$cliente = {
 			name: event.target.name.value,
 			email: event.target.email.value,
 			telefone: event.target.telefone.value
