@@ -28,8 +28,8 @@
 <div class="container" use:centerInScreen>
 	<div use:scrollIntoView>
 		<h1>Olá! Bem-vindo(a) ao simulador do Canal Solar</h1>
-		<p>Nós vamos te ajudar a economizar na sua conta de energia. Nossa ferramenta gratuita vai analisar sua conta de energia e dimensionar o sistema de energia solar ideal para sua residência</p>
-		<h2 style="margin-top: 30px;">Em qual estado você mora?</h2>
+		<p>Nós vamos te ajudar a economizar na sua conta de energia. Nossa ferramenta gratuita vai analisar sua conta de energia e dimensionar o sistema de energia solar ideal para você</p>
+		<h2 style="margin-top: 30px;">Qual seu estado?</h2>
 		<Mapa on:click="{event => estado.set(event.detail)}" />
 	</div>
 
